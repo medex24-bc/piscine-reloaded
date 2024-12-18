@@ -1,37 +1,54 @@
-#include <stdio.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_range.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrharoui <mrharoui@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/04 22:22:08 by mrharoui          #+#    #+#             */
+/*   Updated: 2024/11/06 13:54:29 by mrharoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
+#include <stdio.h>
 
-int *ft_range(int min, int max)
+int	*ft_range(int min, int max)
 {
-    int *array;
-    int i;
+	int	i;
+	int	size;
+	int	*tab;
 
-    i = 0;
-    array = (int *)malloc(sizeof(int) * (max - min));
-    if (array == NULL)
-        return (array);
-    printf("test");
-    while (i < max)
-    {
-        array[i] = min;
-        i++;
-        min++;
-    }
-    return (array);
+	i = 0;
+	tab = NULL;
+	size = max - min;
+	if (min >= max)
+		return (NULL);
+	tab = (int *)malloc(sizeof(int) * size);
+	if (tab == NULL)
+		return (NULL);
+	while (i < size)
+	{
+		tab[i] = min;
+		i++;
+		min++;
+	}
+	return (tab);
 }
 
-int main()
+/*int main()
 {
-    int min = 5;
-    int max = 13;
-    int *array = ft_range(min, max);
-
-    int i = 0;
-    while (array)
-    {
-        printf("%d\n", *array);
-       array++;
-    }
-    return (0);
-}
+	int	min = 9;
+	int	max = 2;
+	int	size = max - min;
+	int	i = 0;
+	int	*tab = ft_range(min, max);
+	
+	if (tab == NULL)
+		printf("NULL\n");
+	while (i < size)
+	{
+		printf("%d\n", 	tab[i]);
+		i++;
+	}
+}*/
