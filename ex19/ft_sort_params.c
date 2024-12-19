@@ -11,20 +11,17 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdlib.h>
 
 void	ft_swap_argv(char **a, char **b);
 void	ft_output_argv(char **argv, int argc);
-void	ft_sort_param(int argc, char *argv[], int i, int x, int y, int flag);
+int		ft_sort_param(int argc, char *argv[], int x, int y);
 
 int	main(int argc, char *argv[])
 {
-	int	i;
 	int	x;
 	int	y;
 	int	flag;
 
-	i = 0;
 	x = 0;
 	y = 1;
 	flag = 1;
@@ -33,40 +30,45 @@ int	main(int argc, char *argv[])
 		write(1, "\n", 1);
 		return (1);
 	}
-	ft_sort_param(argc, argv, i, x, y, flag);
-}
-
-void	ft_sort_param(int argc, char *argv[], int i, int x, int y, int flag)
-{
 	while (flag == 1)
 	{
 		flag = 0;
 		y = 1;
 		x = 0;
-		while (x < argc - 1)
-		{
-			x = y + 1;
-			i = 0;
-			while (argv[y][i] && argv[x][i])
-			{
-				if (argv[y][i] > argv[x][i])
-				{
-					ft_swap_argv(&argv[y], &argv[x]);
-					flag = 1;
-				}
-				if (argv[y][i] < argv[x][i])       
-					break;
-				i++;
-			}
-			y++;
-		}
+		flag = ft_sort_param(argc, argv, x, y);
 	}
 	ft_output_argv(argv, argc);
 }
 
+int	ft_sort_param(int argc, char *argv[], int x, int y)
+{
+	int	i;
+
+	i = 0;
+	while (x < argc - 1)
+	{
+		x = y + 1;
+		i = 0;
+		while (argv[y][i] && argv[x][i])
+		{
+			if (argv[y][i] > argv[x][i])
+			{
+				ft_swap_argv(&argv[y], &argv[x]);
+				return (1);
+			}
+			if (argv[y][i] < argv[x][i])
+				break ;
+			i++;
+		}
+		y++;
+	}
+	return (0);
+}
+
 void	ft_swap_argv(char **a, char **b)
 {
-	char *tmp;
+	char	*tmp;
+
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
