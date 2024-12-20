@@ -6,7 +6,7 @@
 /*   By: mrharoui <mrharoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:58:49 by mrharoui          #+#    #+#             */
-/*   Updated: 2024/12/19 12:47:48 by mrharoui         ###   ########.fr       */
+/*   Updated: 2024/12/20 22:50:50 by mrharoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,20 @@ int	main(int argc, char *argv[])
 
 	if (argc < 2)
 	{
-		write(1, "File name missing\n", 18);
+		write(1, "File name missing.\n", 19);
 		return (-1);
 	}
 	else if (argc > 2)
 	{
-		write(1, "Too many arguments\n", 19);
+		write(1, "Too many arguments.\n", 20);
 		return (-2);
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
+	{
+		write(1, "Cannot read file.\n", 18);
 		return (-3);
+	}
 	ft_read_file(fd);
 	close(fd);
 	return (0);
