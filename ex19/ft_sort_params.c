@@ -115,3 +115,30 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
+
+
+int	ft_sort_param(int argc, char *argv[], int x, int y)
+{
+	int	i;
+
+	while (y < argc - 1)
+	{
+		x = y + 1;
+		while (x < argc)
+		{
+			i = 0;
+			while (argv[y][i] && argv[x][i] && argv[y][i] == argv[x][i])
+				i++;
+			if (argv[y][i] > argv[x][i])
+			{
+				ft_swap_argv(&argv[y], &argv[x]);
+				return (1);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
