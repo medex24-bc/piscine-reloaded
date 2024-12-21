@@ -6,7 +6,7 @@
 /*   By: mrharoui <mrharoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:03:00 by mrharoui          #+#    #+#             */
-/*   Updated: 2024/12/21 10:38:07 by mrharoui         ###   ########.fr       */
+/*   Updated: 2024/12/21 10:51:16 by mrharoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+void	ft_putchar(char c);
 void	ft_swap_argv(char **a, char **b);
 void	ft_output_argv(char **argv, int argc);
 int		ft_sort_param(int argc, char *argv[], int x, int y);
@@ -56,21 +53,21 @@ int	ft_sort_param(int argc, char *argv[], int x, int y)
 	int	i;
 
 	i = 0;
-	while (x < argc - 1)
+	while (y < argc - 1)
 	{
 		x = y + 1;
-		i = 0;
-		while (argv[y][i] && argv[x][i])
+		while (x < argc)
 		{
-			if (argv[y][i] > argv[x][i] || (argv[y][i] == argv[x][i]
-				&& argv[y][i] > argv[x][i + 1]))
+			i = 0;
+			while (argv[y][i] && argv[x][i] && argv[y][i] == argv[x][i])
+				i++;
+			if (argv[y][i] > argv[x][i])
 			{
 				ft_swap_argv(&argv[y], &argv[x]);
 				return (1);
 			}
 			if (argv[y][i] < argv[x][i])
 				break ;
-			i++;
 		}
 		y++;
 	}
@@ -115,30 +112,3 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
-
-
-
-int	ft_sort_param(int argc, char *argv[], int x, int y)
-{
-	int	i;
-
-	while (y < argc - 1)
-	{
-		x = y + 1;
-		while (x < argc)
-		{
-			i = 0;
-			while (argv[y][i] && argv[x][i] && argv[y][i] == argv[x][i])
-				i++;
-			if (argv[y][i] > argv[x][i])
-			{
-				ft_swap_argv(&argv[y], &argv[x]);
-				return (1);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
-
